@@ -389,7 +389,7 @@ public class ThemeFragment extends ToolbarFragment {
 
             addPage(new ThemeCoverPage(activity, theme.getTitle(),
                     previewInfo.resolveAccentColor(res), previewInfo.icons,
-                    previewInfo.headlineFontFamily, previewInfo.bottomSheeetCornerRadius,
+                    previewInfo.headlineFontFamily,
                     previewInfo.shapeDrawable, previewInfo.shapeAppIcons, editClickListener,
                     mColorButtonIds, mColorTileIds, mColorTileIconIds, mShapeIconIds,
                     wallpaperListener, coverCardLayoutListener));
@@ -574,7 +574,7 @@ public class ThemeFragment extends ToolbarFragment {
                 if (mScrim != null) {
                     background = new LayerDrawable(new Drawable[]{background, mScrim});
                 }
-                view.findViewById(R.id.theme_preview_card_background).setBackground(background);
+                ((ImageView) view.findViewById(R.id.theme_preview_card_background)).setImageDrawable(background);
                 if (mScrim == null && !mIsTranslucent) {
                     boolean shouldRecycle = false;
                     if (bitmap.getConfig() == Config.HARDWARE) {
