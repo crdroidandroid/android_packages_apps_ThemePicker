@@ -19,6 +19,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
+import android.graphics.Point;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
@@ -90,10 +91,13 @@ public class PreviewPager extends LinearLayout {
                     hMargin,
                     res.getDimensionPixelOffset(R.dimen.preview_page_bottom_margin));
         } else if (mPageStyle == STYLE_ASPECT_RATIO) {
-            DisplayMetrics dm = res.getDisplayMetrics();
-            mScreenAspectRatio = dm.heightPixels > dm.widthPixels
-                    ? (float) dm.heightPixels / dm.widthPixels
-                    : (float) dm.widthPixels / dm.heightPixels;
+            Point size = new Point();
+            getContext().getDisplay().getRealSize(size);
+            int width = size.x;
+            int height = size.y;
+            mScreenAspectRatio = size.y > size.x
+                    ? (float) size.y /size.x
+                    : (float) size.x / size.y;
             mViewPager.setPadding(
                     0,
                     res.getDimensionPixelOffset(R.dimen.preview_page_top_margin),
@@ -120,9 +124,8 @@ public class PreviewPager extends LinearLayout {
         if (mPageStyle == STYLE_ASPECT_RATIO) {
             int availableWidth = MeasureSpec.getSize(widthMeasureSpec);
             int availableHeight = MeasureSpec.getSize(heightMeasureSpec);
-            int indicatorHeight = mPageIndicator.getVisibility() == VISIBLE
-                    ? ((View) mPageIndicator.getParent()).getLayoutParams().height
-                    : 0;
+            // the pager always takes space
+            int indicatorHeight = ((View) mPageIndicator.getParent()).getLayoutParams().height;
             int pagerHeight = availableHeight - indicatorHeight;
             if (availableWidth > 0) {
                 int absoluteCardWidth = (int) ((pagerHeight - mViewPager.getPaddingBottom()
