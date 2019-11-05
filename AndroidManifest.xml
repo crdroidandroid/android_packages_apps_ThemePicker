@@ -42,6 +42,16 @@
         <activity android:name="com.android.customization.picker.ViewOnlyFullPreviewActivity"
             android:resizeableActivity="false"
             android:theme="@style/CustomizationTheme.NoActionBar"/>
+        <activity
+            android:name="com.android.customization.picker.LockClockPickerActivity"
+            android:label="@string/app_name"
+            android:resizeableActivity="true"
+            android:theme="@style/CustomizationTheme.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
     </application>
 
 </manifest>
