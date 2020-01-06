@@ -18,6 +18,7 @@ package com.android.customization.model.clock;
 import android.content.ContentResolver;
 import android.provider.Settings.Secure;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.android.customization.module.ThemesUserEventLogger;
 
@@ -29,10 +30,11 @@ import org.json.JSONObject;
  */
 public class ClockManager extends BaseClockManager {
 
-    // TODO: use constant from Settings.Secure
-    static final String CLOCK_FACE_SETTING = "lock_screen_custom_clock_face";
+    private static final String CLOCK_FACE_SETTING = Secure.LOCK_SCREEN_CUSTOM_CLOCK_FACE;
     private static final String CLOCK_FIELD = "clock";
     private static final String TIMESTAMP_FIELD = "_applied_timestamp";
+    private static final String TAG = "ClockManager";
+
     private final ContentResolver mContentResolver;
     private final ThemesUserEventLogger mEventLogger;
 
@@ -45,34 +47,53 @@ public class ClockManager extends BaseClockManager {
 
     @Override
     protected void handleApply(Clockface option, Callback callback) {
-        boolean stored;
-        try {
-            final JSONObject json = new JSONObject();
-            json.put(CLOCK_FIELD, option.getId());
-            json.put(TIMESTAMP_FIELD, System.currentTimeMillis());
-            stored = Secure.putString(mContentResolver, CLOCK_FACE_SETTING, json.toString());
-        } catch (JSONException ex) {
-            stored = false;
-        }
-        if (stored) {
-            mEventLogger.logClockApplied(option);
-            callback.onSuccess();
-        } else {
+        String value = toJSON(option.getId());
+        if (value == null) {
             callback.onError(null);
+        } else {
+            if (Secure.putString(mContentResolver, CLOCK_FACE_SETTING, value)) {
+                mEventLogger.logClockApplied(option);
+                callback.onSuccess();
+            } else {
+                callback.onError(null);
+            }
         }
     }
 
     @Override
     protected String lookUpCurrentClock() {
-        final String value = Secure.getString(mContentResolver, CLOCK_FACE_SETTING);
-        if (TextUtils.isEmpty(value)) {
+        String value = Secure.getString(mContentResolver, CLOCK_FACE_SETTING);
+        if (!TextUtils.isEmpty(value)) {
+            return fromJSON(value);
+        }
+        return null;
+    }
+
+    private String toJSON(String value) {
+        try {
+            JSONObject json = new JSONObject();
+            json.put(CLOCK_FIELD, value);
+            json.put(TIMESTAMP_FIELD, System.currentTimeMillis());
+            return json.toString();
+        } catch (JSONException ex) {
+            Log.e(TAG, "Failed migrating settings value to JSON format", ex);
+        }
+        return null;
+    }
+
+    private String fromJSON(String value) {
+        JSONObject json;
+        try {
+            json = new JSONObject(value);
+        } catch (JSONException ex) {
+            Log.e(TAG, "Settings value is not valid JSON", ex);
             return value;
         }
         try {
-            final JSONObject json = new JSONObject(value);
             return json.getString(CLOCK_FIELD);
         } catch (JSONException ex) {
-            return value;
+            Log.e(TAG, "JSON object does not contain clock field.", ex);
+            return null;
         }
     }
 }
