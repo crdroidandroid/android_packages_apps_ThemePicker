@@ -72,14 +72,14 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
     private CustomizationOption mAppliedOption;
 
     public OptionSelectorController(RecyclerView container, List<T> options) {
-        this(container, options, false, true);
+        this(container, options, true, true);
     }
 
     public OptionSelectorController(RecyclerView container, List<T> options,
             boolean useGrid, boolean showCheckmark) {
         mContainer = container;
         mOptions = options;
-        mUseGrid = container.getResources().getBoolean(R.bool.use_grid_for_options) || useGrid;
+        mUseGrid = useGrid;
         mShowCheckmark = showCheckmark;
     }
 
@@ -222,9 +222,15 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
             }
         };
 
-        mContainer.setLayoutManager(new LinearLayoutManager(mContainer.getContext(),
-                LinearLayoutManager.HORIZONTAL, false));
         Resources res = mContainer.getContext().getResources();
+        if (mUseGrid) {
+            mContainer.setLayoutManager(new GridLayoutManager(mContainer.getContext(),
+                    res.getInteger(R.integer.options_grid_num_columns)));
+        } else {
+            mContainer.setLayoutManager(new LinearLayoutManager(mContainer.getContext(),
+                    LinearLayoutManager.HORIZONTAL, false));
+        }
+
         mContainer.setAdapter(mAdapter);
 
         // Measure RecyclerView to get to the total amount of space used by all options.
@@ -243,10 +249,18 @@ public class OptionSelectorController<T extends CustomizationOption<T>> {
 
         if (mUseGrid) {
             int numColumns = res.getInteger(R.integer.options_grid_num_columns);
-            int widthPerItem = totalWidth / mAdapter.getItemCount();
+            int widthPerItem = res.getDimensionPixelOffset(R.dimen.option_tile_width);
             int extraSpace = availableWidth - widthPerItem * numColumns;
-            int containerSidePadding = extraSpace / (numColumns + 1);
-            mContainer.setLayoutManager(new GridLayoutManager(mContainer.getContext(), numColumns));
+            while (extraSpace < 0) {
+                numColumns -= 1;
+                extraSpace = availableWidth - widthPerItem * numColumns;
+            }
+
+            if (mContainer.getLayoutManager() != null) {
+                ((GridLayoutManager) mContainer.getLayoutManager()).setSpanCount(numColumns);
+            }
+
+            int containerSidePadding = (extraSpace / (numColumns + 1)) / 2;
             mContainer.setPaddingRelative(containerSidePadding, 0, containerSidePadding, 0);
             mContainer.setOverScrollMode(View.OVER_SCROLL_NEVER);
             return;
