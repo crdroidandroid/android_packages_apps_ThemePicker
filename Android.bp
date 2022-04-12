@@ -75,6 +75,7 @@ java_defaults {
 	    "renderscript_toolkit",
         "wallpaper-common-deps",
         "SettingsLibSettingsTheme",
+        "SystemUIFlagsLib",
         "SystemUI-statsd",
         "styleprotoslite",
         "androidx.lifecycle_lifecycle-runtime-ktx",
