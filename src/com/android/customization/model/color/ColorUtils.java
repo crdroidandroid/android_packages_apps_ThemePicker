@@ -40,4 +40,8 @@ public final class ColorUtils {
         }
         return sSysuiRes.getBoolean(sFlagId);
     }
+
+    public static String toColorString(int color) {
+        return String.format("#%06X", color & 0x00ffffff);
+    }
 }
