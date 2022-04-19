@@ -69,13 +69,12 @@ android_app {
     name: "ThemePicker",
 
     static_libs: [
-        "colorkt",
-        "themelib",
         "wallpaper-common-deps",
         "SettingsLibSettingsTheme",
         "SystemUIFlagsLib",
         "SystemUI-statsd",
         "styleprotoslite",
+        "monet",
     ],
 
     srcs: [

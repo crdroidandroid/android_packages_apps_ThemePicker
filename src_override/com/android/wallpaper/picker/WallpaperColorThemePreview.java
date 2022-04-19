@@ -17,11 +17,6 @@ import com.google.android.material.resources.MaterialAttributes;
 
 public interface WallpaperColorThemePreview {
 
-    default boolean determineThemedIconsSupport(Context context) {
-        ThemedIconSwitchProvider instance = ThemedIconSwitchProvider.getInstance(context);
-        return instance.isThemedIconAvailable() && instance.isThemedIconEnabled();
-    }
-
     default boolean shouldApplyWallpaperColors() {
         FragmentActivity activity = ((Fragment) this).getActivity();
         if (activity == null || activity.isFinishing()) {
@@ -36,8 +31,6 @@ public interface WallpaperColorThemePreview {
         }
     }
 
-    boolean shouldUpdateWorkspaceColors();
-
     default void updateSystemBarColor(Context context) {
         int resolveOrThrow = MaterialAttributes.resolveOrThrow(context, android.R.attr.colorPrimary,
                 "android.R.attr.colorPrimary is not set in the current theme");
@@ -49,7 +42,7 @@ public interface WallpaperColorThemePreview {
     default void updateWorkspacePreview(SurfaceView surfaceView,
             WorkspaceSurfaceHolderCallback workspaceSurfaceHolderCallback,
             WallpaperColors wallpaperColors) {
-        if (shouldUpdateWorkspaceColors()) {
+        if (shouldApplyWallpaperColors()) {
             int visibility = surfaceView.getVisibility();
             surfaceView.setVisibility(View.GONE);
             if (workspaceSurfaceHolderCallback != null) {

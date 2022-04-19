@@ -18,18 +18,11 @@ import com.google.android.material.tabs.TabLayout;
 public class LiveWallpaperColorThemePreviewFragment extends LivePreviewFragment implements
         WallpaperColorThemePreview {
     private boolean mIgnoreInitialColorChange;
-    private boolean mThemedIconSupported;
     private WallpaperColors mWallpaperColors;
 
     @Override
     public WorkspaceSurfaceHolderCallback createWorkspaceSurfaceCallback(SurfaceView surfaceView) {
-        return new WorkspaceSurfaceHolderCallback(surfaceView, getContext(), mThemedIconSupported);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mThemedIconSupported = determineThemedIconsSupport(context);
+        return new WorkspaceSurfaceHolderCallback(surfaceView, getContext(), shouldApplyWallpaperColors());
     }
 
     @Override
@@ -49,7 +42,7 @@ public class LiveWallpaperColorThemePreviewFragment extends LivePreviewFragment 
             mWallpaperColors = wallpaperColors;
             Context context = getContext();
             RemoteViews.ColorResources.create(context,
-                    new WallpaperColorResources(wallpaperColors, context).getColorOverlay()).apply(context);
+                    new WallpaperColorResources(wallpaperColors).getColorOverlay()).apply(context);
             updateSystemBarColor(context);
             getView().setBackgroundColor(
                     MaterialAttributes.resolveOrThrow(context, android.R.attr.colorPrimary,
@@ -67,7 +60,7 @@ public class LiveWallpaperColorThemePreviewFragment extends LivePreviewFragment 
             fullscreenButtonsContainer.removeAllViews();
             setFullScreenActions(
                     inflater.inflate(R.layout.fullscreen_buttons, fullscreenButtonsContainer));
-            ((PreviewFragment) this).mBottomActionBar.setColor(inflater.getContext());
+            mBottomActionBar.setColor(inflater.getContext());
             updateWorkspacePreview(mWorkspaceSurface, mWorkspaceSurfaceCallback, wallpaperColors);
 
             ViewGroup separatedTabsContainer = (ViewGroup) getView().findViewById(
@@ -84,10 +77,5 @@ public class LiveWallpaperColorThemePreviewFragment extends LivePreviewFragment 
         }
         mIgnoreInitialColorChange = false;
         super.onWallpaperColorsChanged(wallpaperColors, i);
-    }
-
-    @Override
-    public boolean shouldUpdateWorkspaceColors() {
-        return mThemedIconSupported;
     }
 }
