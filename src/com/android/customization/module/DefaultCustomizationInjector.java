@@ -97,7 +97,8 @@ public class DefaultCustomizationInjector extends BaseWallpaperInjector
             boolean viewAsHome,
             boolean viewFullScreen,
             boolean testingModeEnabled) {
-        return MonetPreviewFragment.newInstance(wallpaperInfo, mode, viewAsHome, viewFullScreen, testingModeEnabled);
+        return MonetPreviewFragment.newInstance(wallpaperInfo, mode, viewAsHome, viewFullScreen,
+                testingModeEnabled);
     }
 
     @Override
