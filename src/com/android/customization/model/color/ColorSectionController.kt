@@ -202,8 +202,8 @@ class ColorSectionController(
             }
             val wallpaperColors3 = mColorManager.mHomeWallpaperColors
             val colorProvider = mColorManager.mProvider as ColorProvider
-            val wallpapersColorsChanged = (colorProvider.homeWallpaperColors == wallpaperColors3
-                    ) || (colorProvider.lockWallpaperColors == wallpaperColors2)
+            val wallpapersColorsChanged = (colorProvider.homeWallpaperColors != wallpaperColors3
+                    ) || (colorProvider.lockWallpaperColors != wallpaperColors2)
             if (wallpapersColorsChanged) {
                 colorProvider.homeWallpaperColors = wallpaperColors3
                 colorProvider.lockWallpaperColors = wallpaperColors2
