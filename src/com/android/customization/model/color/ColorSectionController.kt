@@ -101,9 +101,6 @@ class ColorSectionController(
             .inflate(R.layout.color_section_view, null as ViewGroup?) as ColorSectionView
         mColorViewPager = mColorSectionView!!.requireViewById<ViewPager2>(R.id.color_view_pager)
         mTabLayout = mColorSectionView!!.requireViewById(R.id.separated_tabs)
-        if (mColorViewPager.adapter == null) {
-            mColorViewPager.setAdapter(mColorSectionAdapter)
-        }
         mTabLayout!!.setViewPager(mColorViewPager)
         mWallpaperColorsViewModel.homeWallpaperColors.observe(mLifecycleOwner) {
             mHomeWallpaperColors = it
@@ -176,6 +173,8 @@ class ColorSectionController(
                             }
                             mSelectedColor = colorOption
                             mColorViewPager.post {
+                                if (mColorViewPager.adapter == null)
+                                    mColorViewPager.setAdapter(mColorSectionAdapter)
                                 mColorViewPager.adapter?.notifyItemChanged(0)
                                 if (mTabLayout != null && mTabLayout!!.tabCount == 0) {
                                     val newTab = mTabLayout!!.newTab()
