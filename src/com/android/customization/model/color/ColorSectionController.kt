@@ -243,8 +243,8 @@ class ColorSectionController(
     }
 
     override fun onSaveInstanceState(bundle: Bundle) {
-        val viewPager2 = mColorViewPager
-        bundle.putInt("COLOR_TAB_POSITION", viewPager2.currentItem)
+        if (this::mColorViewPager.isInitialized)
+            bundle.putInt("COLOR_TAB_POSITION", mColorViewPager.currentItem)
     }
 
     init {
