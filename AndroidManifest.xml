@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.BIND_WALLPAPER" />
 
     <uses-permission android:name="android.permission.MODIFY_DAY_NIGHT_MODE" />
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <queries>
         <!-- Specific intents Wallpaper picker query for -->
@@ -44,7 +45,7 @@
             <category android:name="android.intent.category.HOME" />
         </intent>
         <!-- Themes stub package -->
-        <package android:name="org.lineageos.customization" />
+        <package android:name="com.crdroid.customization" />
     </queries>
 
     <uses-permission android:name="com.android.launcher3.permission.READ_SETTINGS" />
