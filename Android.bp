@@ -124,8 +124,9 @@ android_app {
         "WallpaperPicker2",
     ],
     required: [
-        "privapp_whitelist_com.android.wallpaper",
         "PixelThemesStub",
+        "default_permissions_com.android.wallpaper",
+        "privapp_whitelist_com.android.wallpaper"
     ],
 }
 
@@ -137,6 +138,14 @@ android_app_import {
     dex_preopt: {
         enabled: false,
     },
+}
+
+prebuilt_etc {
+    name: "default_permissions_com.android.wallpaper",
+    system_ext_specific: true,
+    src: "default_permissions_com.android.wallpaper.xml",
+    sub_dir: "default-permissions",
+    filename_from_src: true,
 }
 
 prebuilt_etc {
