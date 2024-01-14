@@ -115,7 +115,8 @@ public class ColorCustomizationManager implements CustomizationManager<ColorOpti
             }
         };
         mContentResolver.registerContentObserver(
-                Settings.Secure.CONTENT_URI, /* notifyForDescendants= */ true, mObserver);
+                Settings.Secure.getUriFor(ResourceConstants.THEME_SETTING),
+                /* notifyForDescendants= */ true, mObserver);
         mOverlayManagerCompat = overlayManagerCompat;
     }
 
@@ -153,10 +154,16 @@ public class ColorCustomizationManager implements CustomizationManager<ColorOpti
 
                 // OVERLAY_COLOR_BOTH is only for wallpaper color case, not preset.
                 if (!COLOR_SOURCE_PRESET.equals(colorOption.getSource())) {
+                    overlaysJson.remove(OVERLAY_CATEGORY_COLOR);
+                    overlaysJson.remove(OVERLAY_CATEGORY_SYSTEM_PALETTE);
                     boolean isForBoth =
-                            (mLockWallpaperColors == null || mLockWallpaperColors.equals(
-                                    mHomeWallpaperColors));
-                    overlaysJson.put(OVERLAY_COLOR_BOTH, isForBoth ? "1" : "0");
+                            mLockWallpaperColors != null && !mLockWallpaperColors.equals(
+                                    mHomeWallpaperColors);
+                    if (isForBoth) {
+                        overlaysJson.put(OVERLAY_COLOR_BOTH, "1");
+                    } else {
+                        overlaysJson.remove(OVERLAY_COLOR_BOTH);
+                    }
                 } else {
                     overlaysJson.remove(OVERLAY_COLOR_BOTH);
                 }
