@@ -27,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Transition;
 
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
@@ -66,6 +67,7 @@ public class IconShapeFragment extends AppbarFragment {
     private ViewGroup mContent;
     private View mError;
     private BottomActionBar mBottomActionBar;
+    private Boolean mEnterTransitionEnded = false, mOptionsLoaded = false;
 
     private final Callback mApplyIconShapeCallback = new Callback() {
         @Override
@@ -102,6 +104,32 @@ public class IconShapeFragment extends AppbarFragment {
                     windowInsets.getSystemWindowInsetBottom());
             return windowInsets.consumeSystemWindowInsets();
         });
+
+        Transition enterTransition = (Transition) getEnterTransition();
+        if (enterTransition != null) {
+            enterTransition.addListener(new Transition.TransitionListener() {
+                @Override
+                public void onTransitionStart(Transition transition) {}
+
+                @Override
+                public void onTransitionEnd(Transition transition) {
+                    mEnterTransitionEnded = true;
+                    maybeSetSelectedOption();
+                }
+
+                @Override
+                public void onTransitionCancel(Transition transition) {
+                    mEnterTransitionEnded = true;
+                    maybeSetSelectedOption();
+                }
+
+                @Override
+                public void onTransitionPause(Transition transition) {}
+
+                @Override
+                public void onTransitionResume(Transition transition) {}
+            });
+        }
 
         mIconShapeManager = IconShapeManager.getInstance(getContext(), new OverlayManagerCompat(getContext()));
         setUpOptions(savedInstanceState);
@@ -141,13 +169,19 @@ public class IconShapeFragment extends AppbarFragment {
                         mOptionsContainer, options, /* useGrid= */ false, CheckmarkStyle.CORNER);
                 mOptionsController.initOptions(mIconShapeManager);
                 mSelectedOption = getActiveOption(options);
-                mOptionsController.setSelectedOption(mSelectedOption);
                 onOptionSelected(mSelectedOption);
                 restoreBottomActionBarVisibility(savedInstanceState);
+                mOptionsLoaded = true;
+                maybeSetSelectedOption();
 
                 mOptionsController.addListener(selectedOption -> {
                     onOptionSelected(selectedOption);
-                    mBottomActionBar.show();
+                    // Show the apply button only when it isn't already the active option
+                    if (((IconShapeOption) selectedOption).isActive(mIconShapeManager)) {
+                        mBottomActionBar.hide();
+                    } else {
+                        mBottomActionBar.show();
+                    }
                 });
             }
 
@@ -159,6 +193,12 @@ public class IconShapeFragment extends AppbarFragment {
                 showError();
             }
         }, /*reload= */ true);
+    }
+
+    private void maybeSetSelectedOption() {
+        if (mEnterTransitionEnded && mOptionsLoaded) {
+            mOptionsController.setSelectedOption(mSelectedOption);
+        }
     }
 
     private IconShapeOption getActiveOption(List<IconShapeOption> options) {
