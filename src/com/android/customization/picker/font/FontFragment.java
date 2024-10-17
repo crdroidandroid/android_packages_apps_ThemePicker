@@ -28,6 +28,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.ContentLoadingProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Transition;
 
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
@@ -70,6 +71,7 @@ public class FontFragment extends AppbarFragment {
     private ViewGroup mContent;
     private View mError;
     private BottomActionBar mBottomActionBar;
+    private Boolean mEnterTransitionEnded = false, mOptionsLoaded = false;
 
     private final Callback mApplyFontCallback = new Callback() {
         @Override
@@ -106,6 +108,34 @@ public class FontFragment extends AppbarFragment {
                     windowInsets.getSystemWindowInsetBottom());
             return windowInsets.consumeSystemWindowInsets();
         });
+
+        Transition enterTransition = (Transition) getEnterTransition();
+        if (enterTransition != null) {
+            enterTransition.addListener(new Transition.TransitionListener() {
+                @Override
+                public void onTransitionStart(Transition transition) {}
+
+                @Override
+                public void onTransitionEnd(Transition transition) {
+                    mEnterTransitionEnded = true;
+                    maybeSetSelectedOption();
+                }
+
+                @Override
+                public void onTransitionCancel(Transition transition) {
+                    mEnterTransitionEnded = true;
+                    maybeSetSelectedOption();
+                }
+
+                @Override
+                public void onTransitionPause(Transition transition) {}
+
+                @Override
+                public void onTransitionResume(Transition transition) {}
+            });
+        } else {
+            mEnterTransitionEnded = true;
+        }
 
         mFontManager = FontManager.getInstance(getContext(), new OverlayManagerCompat(getContext()));
         setUpOptions(savedInstanceState);
@@ -145,13 +175,19 @@ public class FontFragment extends AppbarFragment {
                         mOptionsContainer, options, /* useGrid= */ false, CheckmarkStyle.CORNER);
                 mOptionsController.initOptions(mFontManager);
                 mSelectedOption = getActiveOption(options);
-                mOptionsController.setSelectedOption(mSelectedOption);
                 onOptionSelected(mSelectedOption);
                 restoreBottomActionBarVisibility(savedInstanceState);
+                mOptionsLoaded = true;
+                maybeSetSelectedOption();
 
                 mOptionsController.addListener(selectedOption -> {
                     onOptionSelected(selectedOption);
-                    mBottomActionBar.show();
+                    // Show the apply button only when it isn't already the active option
+                    if (mFontManager.isActive((FontOption) selectedOption)) {
+                        mBottomActionBar.hide();
+                    } else {
+                        mBottomActionBar.show();
+                    }
                 });
             }
 
@@ -163,6 +199,12 @@ public class FontFragment extends AppbarFragment {
                 showError();
             }
         }, /*reload= */ true);
+    }
+
+    private void maybeSetSelectedOption() {
+        if (mEnterTransitionEnded && mOptionsLoaded) {
+            mOptionsController.setSelectedOption(mSelectedOption);
+        }
     }
 
     private FontOption getActiveOption(List<FontOption> options) {
