@@ -35,11 +35,6 @@ public interface ResourceConstants {
     String ANDROID_PACKAGE = "android";
 
     /**
-     * Package name for android settings resources.
-     */
-    String SETTINGS_PACKAGE = "com.android.settings";
-
-    /**
      * Package name for android sysui resources.
      */
     String SYSUI_PACKAGE = "com.android.systemui";
@@ -64,10 +59,7 @@ public interface ResourceConstants {
     String OVERLAY_CATEGORY_LOCKFONT = "android.theme.customization.lockscreen_clock_font";
     String OVERLAY_CATEGORY_SHAPE = "android.theme.customization.adaptive_icon_shape";
     String OVERLAY_CATEGORY_ICON_ANDROID = "android.theme.customization.icon_pack.android";
-    String OVERLAY_CATEGORY_ICON_SETTINGS = "android.theme.customization.icon_pack.settings";
     String OVERLAY_CATEGORY_ICON_SYSUI = "android.theme.customization.icon_pack.systemui";
-    String OVERLAY_CATEGORY_ICON_LAUNCHER = "android.theme.customization.icon_pack.launcher";
-    String OVERLAY_CATEGORY_ICON_THEMEPICKER = "android.theme.customization.icon_pack.themepicker";
 
     /**
      * Global Android theme category (default theme prebundled with the OS)
@@ -108,7 +100,7 @@ public interface ResourceConstants {
 
     static String[] getPackagesToOverlay(Context context) {
         if (sTargetPackages.isEmpty()) {
-            sTargetPackages.addAll(Arrays.asList(ANDROID_PACKAGE, SETTINGS_PACKAGE,
+            sTargetPackages.addAll(Arrays.asList(ANDROID_PACKAGE,
                     SYSUI_PACKAGE));
         }
         return sTargetPackages.toArray(new String[0]);

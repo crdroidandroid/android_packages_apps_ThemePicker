@@ -18,7 +18,6 @@ package com.android.customization.model.iconpack;
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
 import static com.android.customization.model.ResourceConstants.ICONS_FOR_PREVIEW;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
-import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
 
 import android.content.Context;
@@ -48,7 +47,6 @@ public class IconPackOptionProvider {
     private final List<String> mOverlayPackages;
     private final List<IconPackOption> mOptions = new ArrayList<>();
     private final List<String> mSysUiIconsOverlayPackages = new ArrayList<>();
-    private final List<String> mSettingsIconsOverlayPackages = new ArrayList<>();
 
     public IconPackOptionProvider(Context context, OverlayManagerCompat manager) {
         mContext = context;
@@ -56,8 +54,6 @@ public class IconPackOptionProvider {
         String[] targetPackages = ResourceConstants.getPackagesToOverlay(context);
         mSysUiIconsOverlayPackages.addAll(manager.getOverlayPackagesForCategory(
                 OVERLAY_CATEGORY_ICON_SYSUI, UserHandle.myUserId(), targetPackages));
-        mSettingsIconsOverlayPackages.addAll(manager.getOverlayPackagesForCategory(
-                OVERLAY_CATEGORY_ICON_SETTINGS, UserHandle.myUserId(), targetPackages));
         mOverlayPackages = new ArrayList<>();
         mOverlayPackages.addAll(manager.getOverlayPackagesForCategory(OVERLAY_CATEGORY_ICON_ANDROID,
                 UserHandle.myUserId(), ResourceConstants.getPackagesToOverlay(mContext)));
@@ -88,10 +84,6 @@ public class IconPackOptionProvider {
 
         for (String overlayPackage : mSysUiIconsOverlayPackages) {
             addOrUpdateOption(optionsByPrefix, overlayPackage, OVERLAY_CATEGORY_ICON_SYSUI);
-        }
-
-        for (String overlayPackage : mSettingsIconsOverlayPackages) {
-            addOrUpdateOption(optionsByPrefix, overlayPackage, OVERLAY_CATEGORY_ICON_SETTINGS);
         }
 
         List<IconPackOption> customOptions = new ArrayList<>();
@@ -144,7 +136,6 @@ public class IconPackOptionProvider {
         }
         option.addOverlayPackage(OVERLAY_CATEGORY_ICON_ANDROID, null);
         option.addOverlayPackage(OVERLAY_CATEGORY_ICON_SYSUI, null);
-        option.addOverlayPackage(OVERLAY_CATEGORY_ICON_SETTINGS, null);
         mOptions.add(option);
     }
 

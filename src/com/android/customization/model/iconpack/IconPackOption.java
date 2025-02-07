@@ -16,10 +16,8 @@
 package com.android.customization.model.iconpack;
 
 import static com.android.customization.model.ResourceConstants.ANDROID_PACKAGE;
-import static com.android.customization.model.ResourceConstants.SETTINGS_PACKAGE;
 import static com.android.customization.model.ResourceConstants.SYSUI_PACKAGE;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_ANDROID;
-import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SETTINGS;
 import static com.android.customization.model.ResourceConstants.OVERLAY_CATEGORY_ICON_SYSUI;
 
 import android.content.Context;
@@ -94,7 +92,6 @@ public class IconPackOption implements CustomizationOption<IconPackOption> {
         OverlayManagerCompat overlayManager = iconManager.getOverlayManager();
         if (mIsDefault) {
             return overlayManager.getEnabledPackageName(SYSUI_PACKAGE, OVERLAY_CATEGORY_ICON_SYSUI) == null &&
-                    overlayManager.getEnabledPackageName(SETTINGS_PACKAGE, OVERLAY_CATEGORY_ICON_SETTINGS) == null &&
                     overlayManager.getEnabledPackageName(ANDROID_PACKAGE, OVERLAY_CATEGORY_ICON_ANDROID) == null;
         }
         for (Map.Entry<String, String> overlayEntry : getOverlayPackages().entrySet()) {
@@ -131,8 +128,6 @@ public class IconPackOption implements CustomizationOption<IconPackOption> {
        switch(category) {
            case OVERLAY_CATEGORY_ICON_SYSUI:
                return SYSUI_PACKAGE;
-           case OVERLAY_CATEGORY_ICON_SETTINGS:
-               return SETTINGS_PACKAGE;
            case OVERLAY_CATEGORY_ICON_ANDROID:
                return ANDROID_PACKAGE;
            default:
