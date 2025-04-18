@@ -61,6 +61,7 @@ public interface ResourceConstants {
     String OVERLAY_CATEGORY_SYSTEM_PALETTE = "android.theme.customization.system_palette";
     String OVERLAY_CATEGORY_THEME_STYLE = "android.theme.customization.theme_style";
     String OVERLAY_CATEGORY_FONT = "android.theme.customization.font";
+    String OVERLAY_CATEGORY_LOCKFONT = "android.theme.customization.lockscreen_clock_font";
     String OVERLAY_CATEGORY_SHAPE = "android.theme.customization.adaptive_icon_shape";
     String OVERLAY_CATEGORY_ICON_ANDROID = "android.theme.customization.icon_pack.android";
     String OVERLAY_CATEGORY_ICON_SETTINGS = "android.theme.customization.icon_pack.settings";
@@ -78,6 +79,7 @@ public interface ResourceConstants {
      */
     String THEME_SETTING = Secure.THEME_CUSTOMIZATION_OVERLAY_PACKAGES;
     String CONFIG_BODY_FONT_FAMILY = "config_bodyFontFamily";
+    String CONFIG_CLOCK_FONT_FAMILY = "config_clockFontFamily";
     String CONFIG_HEADLINE_FONT_FAMILY = "config_headlineFontFamily";
     String[] ICONS_FOR_PREVIEW = {
             "ic_wifi_signal_3",

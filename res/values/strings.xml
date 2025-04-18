@@ -616,4 +616,7 @@
     [CHAR LIMIT=128].
     -->
     <string name="custom_clocks_label">Custom Clocks</string>
+
+    <!-- Title of a page that shows the user the preview of a clock font selection [CHAR_LIMIT=20] -->
+    <string name="preview_name_lockfont">Clock Font</string>
 </resources>
