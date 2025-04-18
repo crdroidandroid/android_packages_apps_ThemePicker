@@ -32,7 +32,6 @@
         android:textSize="72sp"
         android:textColor="@*android:color/system_accent1_100"
         android:gravity="center"
-        android:includeFontPadding="false"
         android:lineSpacingExtra="0dp"
-        android:lineSpacingMultiplier="@*android:dimen/keyguard_clock_line_spacing_scale" />
+        android:lineSpacingMultiplier="1.1" />
 </LinearLayout>

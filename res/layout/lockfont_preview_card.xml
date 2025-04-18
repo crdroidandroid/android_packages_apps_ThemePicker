@@ -23,21 +23,33 @@
     android:layout_gravity="center"
     android:clipChildren="true">
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_vertical"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <FrameLayout
-            android:id="@+id/theme_preview_card_body_container"
+        <View
+            android:id="@+id/wallpaper_dim_overlay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipChildren="false"
-            android:importantForAccessibility="noHideDescendants">
+            android:layout_height="match_parent"
+            android:background="#26000000" />
 
-            <include layout="@layout/preview_card_lockfont_content" />
-        </FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
 
-    </LinearLayout>
+            <FrameLayout
+                android:id="@+id/theme_preview_card_body_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:importantForAccessibility="noHideDescendants">
+
+                <include layout="@layout/preview_card_lockfont_content" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+
 </androidx.cardview.widget.CardView>
