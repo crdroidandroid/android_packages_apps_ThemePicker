@@ -72,10 +72,11 @@ public class IconPackOptionProvider {
         addDefault();
 
         Map<String, IconPackOption> optionsByPrefix = new HashMap<>();
+
         for (String overlayPackage : mOverlayPackages) {
             IconPackOption option = addOrUpdateOption(optionsByPrefix, overlayPackage,
                     OVERLAY_CATEGORY_ICON_ANDROID);
-            try{
+            try {
                 for (String iconName : ICONS_FOR_PREVIEW) {
                     option.addIcon(loadIconPreviewDrawable(iconName, overlayPackage));
                 }
@@ -93,11 +94,16 @@ public class IconPackOptionProvider {
             addOrUpdateOption(optionsByPrefix, overlayPackage, OVERLAY_CATEGORY_ICON_SETTINGS);
         }
 
+        List<IconPackOption> customOptions = new ArrayList<>();
         for (IconPackOption option : optionsByPrefix.values()) {
             if (option.isValid(mContext)) {
-                mOptions.add(option);
+                customOptions.add(option);
             }
         }
+
+        customOptions.sort((o1, o2) -> o1.getTitle().compareToIgnoreCase(o2.getTitle()));
+
+        mOptions.addAll(customOptions);
     }
 
     private IconPackOption addOrUpdateOption(Map<String, IconPackOption> optionsByPrefix,
