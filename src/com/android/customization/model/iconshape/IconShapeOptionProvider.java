@@ -63,10 +63,24 @@ public class IconShapeOptionProvider {
         mOverlayPackages.addAll(manager.getOverlayPackagesForCategory(OVERLAY_CATEGORY_SHAPE,
                 UserHandle.myUserId(), ResourceConstants.getPackagesToOverlay(mContext)));
 
-        mShapePreviewIconPackages = context.getResources().getStringArray(
-                R.array.icon_shape_preview_packages);
+        mShapePreviewIconPackages = getUserApps(context);
         mThumbSize = mContext.getResources().getDimensionPixelSize(
                 R.dimen.component_shape_thumb_size);
+    }
+
+    private String[] getUserApps(Context context) {
+        PackageManager pm = context.getPackageManager();
+        List<String> launchableApps = new ArrayList<>();
+        List<ApplicationInfo> apps = pm.getInstalledApplications(PackageManager.GET_META_DATA);
+        for (ApplicationInfo appInfo : apps) {
+            if (pm.getLaunchIntentForPackage(appInfo.packageName) != null) {
+                launchableApps.add(appInfo.packageName);
+            }
+            if (launchableApps.size() == 6) {
+                break;
+            }
+        }
+        return launchableApps.toArray(new String[0]);
     }
 
     public List<IconShapeOption> getOptions() {
