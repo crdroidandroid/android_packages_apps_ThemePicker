@@ -90,19 +90,22 @@ public class IconShapeOptionProvider {
 
     private void loadOptions() {
         addDefault();
+        List<IconShapeOption> customOptions = new ArrayList<>();
         for (String overlayPackage : mOverlayPackages) {
             try {
                 Path path = loadPath(mContext.getPackageManager()
                         .getResourcesForApplication(overlayPackage), overlayPackage);
                 PackageManager pm = mContext.getPackageManager();
                 String label = pm.getApplicationInfo(overlayPackage, 0).loadLabel(pm).toString();
-                mOptions.add(new IconShapeOption(overlayPackage, label, path,
+                customOptions.add(new IconShapeOption(overlayPackage, label, path,
                         createShapeDrawable(path), getShapedAppIcons(path)));
             } catch (NameNotFoundException | NotFoundException e) {
                 Log.w(TAG, String.format("Couldn't load shape overlay %s, will skip it",
                         overlayPackage), e);
             }
         }
+        customOptions.sort((o1, o2) -> o1.getTitle().compareToIgnoreCase(o2.getTitle()));
+        mOptions.addAll(customOptions);
     }
 
     private void addDefault() {
