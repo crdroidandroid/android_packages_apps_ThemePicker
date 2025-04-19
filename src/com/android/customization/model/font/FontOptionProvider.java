@@ -65,6 +65,7 @@ public class FontOptionProvider {
 
     private void loadOptions() {
         addDefault();
+        List<FontOption> customOptions = new ArrayList<>();
         for (String overlayPackage : mOverlayPackages) {
             try {
                 Resources overlayRes = mPm.getResourcesForApplication(overlayPackage);
@@ -75,12 +76,14 @@ public class FontOptionProvider {
                         getFontFamily(overlayPackage, overlayRes, CONFIG_BODY_FONT_FAMILY),
                         Typeface.NORMAL);
                 String label = mPm.getApplicationInfo(overlayPackage, 0).loadLabel(mPm).toString();
-                mOptions.add(new FontOption(overlayPackage, label, headlineFont, bodyFont));
+                customOptions.add(new FontOption(overlayPackage, label, headlineFont, bodyFont));
             } catch (NameNotFoundException | NotFoundException e) {
                 Log.w(TAG, String.format("Couldn't load font overlay %s, will skip it",
                         overlayPackage), e);
             }
         }
+        customOptions.sort((o1, o2) -> o1.getTitle().compareToIgnoreCase(o2.getTitle()));
+        mOptions.addAll(customOptions);
     }
 
     private void addDefault() {
