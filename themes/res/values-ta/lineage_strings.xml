@@ -15,5 +15,8 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="default_color_name">Класічны</string>
+    <string name="default_color_name">தொன்மை</string>
+    <string name="bundle1_color_name">கரிமம்</string>
+    <string name="bundle2_color_name">தாள்</string>
+    <string name="bundle3_color_name">ஞாயிறு</string>
 </resources>
