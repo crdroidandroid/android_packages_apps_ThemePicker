@@ -16,24 +16,28 @@
 package com.android.customization.model.lockfont;
 
 import android.content.Context;
+import android.database.ContentObserver;
+import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
+import android.provider.Settings;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
 import com.android.customization.model.CustomizationManager.Callback;
 import com.android.customization.model.CustomizationManager.OptionsFetchedListener;
-import com.android.customization.model.CustomizationOption;
 import com.android.customization.picker.lockfont.LockFontFragment;
 import com.android.customization.picker.lockfont.LockFontSectionView;
-import com.android.customization.widget.OptionSelectorController;
-import com.android.customization.widget.OptionSelectorController.OptionSelectedListener;
 import com.android.themepicker.R;
 import com.android.wallpaper.model.CustomizationSectionController;
-import com.android.wallpaper.util.LaunchUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -42,6 +46,7 @@ import java.util.List;
 public class LockFontSectionController implements CustomizationSectionController<LockFontSectionView> {
 
     private static final String TAG = "LockFontSectionController";
+    private static final String KEY_LOCK_SCREEN_CUSTOM_CLOCK_FACE = "lock_screen_custom_clock_face";
 
     private final LockFontManager mFontOptionsManager;
     private final CustomizationSectionNavigationController mSectionNavigationController;
@@ -92,8 +97,41 @@ public class LockFontSectionController implements CustomizationSectionController
             }
         }, /* reload= */ true);
 
-        fontSectionView.setOnClickListener(v -> mSectionNavigationController.navigateTo(
-                LockFontFragment.newInstance(context.getString(R.string.preview_name_lockfont))));
+        fontSectionView.setOnClickListener(v -> {
+            if (fontSectionView.isEnabled()) {
+                mSectionNavigationController.navigateTo(
+                        LockFontFragment.newInstance(
+                                context.getString(R.string.preview_name_lockfont)));
+            }
+        });
+
+        updateEnabledStateFromClockFace(context, fontSectionView);
+
+        final Uri clockFaceUri = Settings.Secure.getUriFor(KEY_LOCK_SCREEN_CUSTOM_CLOCK_FACE);
+        final ContentObserver observer = new ContentObserver(new Handler(Looper.getMainLooper())) {
+            @Override
+            public void onChange(boolean selfChange) {
+                updateEnabledStateFromClockFace(context, fontSectionView);
+            }
+        };
+
+        context.getContentResolver().registerContentObserver(clockFaceUri, /* notifyForDescendants= */ false, observer);
+
+        fontSectionView.addOnAttachStateChangeListener(new View.OnAttachStateChangeListener() {
+            @Override
+            public void onViewAttachedToWindow(View v) {
+                updateEnabledStateFromClockFace(context, fontSectionView);
+            }
+
+            @Override
+            public void onViewDetachedFromWindow(View v) {
+                try {
+                    context.getContentResolver().unregisterContentObserver(observer);
+                } catch (Throwable t) {
+                    Log.w(TAG, "Failed to unregister ContentObserver", t);
+                }
+            }
+        });
 
         return fontSectionView;
     }
@@ -104,5 +142,37 @@ public class LockFontSectionController implements CustomizationSectionController
                 .findAny()
                 // For development only, as there should always be a grid set.
                 .orElse(options.get(0));
+    }
+
+    /**
+     * Enables the section when no custom clock is set (or clockId is DEFAULT),
+     * otherwise disables it. This is called initially and whenever the setting changes.
+     */
+    private void updateEnabledStateFromClockFace(Context context, View sectionView) {
+        String clockFaceJson = Settings.Secure.getString(
+                context.getContentResolver(), KEY_LOCK_SCREEN_CUSTOM_CLOCK_FACE);
+
+        boolean enable;
+        if (TextUtils.isEmpty(clockFaceJson)) {
+            enable = true;
+        } else {
+            enable = isDefaultClock(clockFaceJson);
+        }
+
+        sectionView.setEnabled(enable);
+        sectionView.setClickable(enable);
+        sectionView.setFocusable(enable);
+        sectionView.setAlpha(enable ? 1f : 0.5f);
+    }
+
+    private boolean isDefaultClock(String clockFaceJson) {
+        try {
+            JSONObject clockFace = new JSONObject(clockFaceJson);
+            String id = clockFace.optString("clockId", "DEFAULT");
+            return "DEFAULT".equals(id);
+        } catch (JSONException e) {
+            Log.w(TAG, "Failed to parse clock face JSON: " + clockFaceJson, e);
+            return false;
+        }
     }
 }
