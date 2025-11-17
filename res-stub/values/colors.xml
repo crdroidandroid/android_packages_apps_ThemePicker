@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Color Primary is used for Accent -->
     <color name="color_primary_bundle1">#ff0a8758</color>
     <color name="color_primary_bundle2">#ff746bc1</color>
-    <color name="color_primary_bundle3">#ffa66800</color>
+    <color name="color_primary_bundle3">#fffc7756</color>
     <color name="color_primary_default">#ffffffff</color>
     <color name="color_primary_fruits1">#ffffeeb2</color>
     <color name="color_primary_fruits2">#ffccee99</color>
     <color name="color_primary_fruits3">#ffb1ebff</color>
     <color name="color_primary_fruits4">#ffebdcff</color>
     <color name="color_primary_fruits5">#ffffd8eb</color>
+    <color name="color_primary_indigo">#ff6f9bff</color>
+    <color name="color_primary_iris">#ffbac3ff</color>
+    <color name="color_primary_jade">#ffb6cf90</color>
+    <color name="color_primary_lemongrass">#ffddeb78</color>
     <color name="color_primary_monochromatic">#ff666666</color>
+    <color name="color_primary_moonstone">#ff9a9ead</color>
+    <color name="color_primary_obsidian">#ff404945</color>
+    <color name="color_primary_peony">#ffff6f7f</color>
+    <color name="color_primary_porcelain">#ffcfc6b4</color>
     <color name="color_primary_rainbow1">#ffffb2b5</color>
     <color name="color_primary_rainbow2">#ffffb868</color>
     <color name="color_primary_rainbow3">#ffe9c44a</color>
@@ -18,6 +27,8 @@
     <color name="color_primary_rainbow5">#ff96cbff</color>
     <color name="color_primary_rainbow6">#ffcbbfff</color>
     <color name="color_primary_rainbow7">#fff5acfb</color>
+
+    <!-- Color Secondary is used for System Colors -->
     <color name="color_secondary_bundle1">#ff0a8758</color>
     <color name="color_secondary_bundle2">#ff746bc1</color>
     <color name="color_secondary_bundle3">#ffa66800</color>
@@ -27,7 +38,15 @@
     <color name="color_secondary_fruits3">#ffb1ebff</color>
     <color name="color_secondary_fruits4">#ffebdcff</color>
     <color name="color_secondary_fruits5">#ffffd8eb</color>
+    <color name="color_secondary_indigo">#ff6f9bff</color>
+    <color name="color_secondary_iris">#ffbac3ff</color>
+    <color name="color_secondary_jade">#ffb6cf90</color>
+    <color name="color_secondary_lemongrass">#ffddeb78</color>
     <color name="color_secondary_monochromatic">#ff333333</color>
+    <color name="color_secondary_moonstone">#ff9a9ead</color>
+    <color name="color_secondary_obsidian">#ff404945</color>
+    <color name="color_secondary_peony">#ffff6f7f</color>
+    <color name="color_secondary_porcelain">#ffcfc6b4</color>
     <color name="color_secondary_rainbow1">#ffffb2b5</color>
     <color name="color_secondary_rainbow2">#ffffb868</color>
     <color name="color_secondary_rainbow3">#ffe9c44a</color>

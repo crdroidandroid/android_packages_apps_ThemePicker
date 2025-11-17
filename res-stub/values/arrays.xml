@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string-array name="color_bundles">
         <item>monochromatic</item>
+        <item>porcelain</item>
+        <item>obsidian</item>
+        <item>moonstone</item>
+        <item>jade</item>
+        <item>iris</item>
+        <item>lemongrass</item>
+        <item>indigo</item>
+        <item>peony</item>
         <item>rainbow1</item>
         <item>rainbow2</item>
         <item>rainbow3</item>
         <item>rainbow4</item>
         <item>rainbow5</item>
-        <item>default</item>
         <item>rainbow6</item>
         <item>rainbow7</item>
         <item>fruits1</item>
@@ -17,5 +23,4 @@
         <item>fruits4</item>
         <item>fruits5</item>
     </string-array>
-
 </resources>

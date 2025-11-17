@@ -5,6 +5,29 @@
     <string name="bundle1_color_name">Carbon</string>
     <string name="bundle2_color_name">Paper</string>
     <string name="bundle3_color_name">Sun</string>
+    <string name="color_name_monochromatic">Monochromatic</string>
+    <string name="default_color_name">Classic</string>
+    <string name="fruit1_color_name">Yellow and red two-color palette</string>
+    <string name="fruit2_color_name">Green and orange two-color palette</string>
+    <string name="fruit3_color_name">Blue and green two-color palette</string>
+    <string name="fruit4_color_name">Light purple and blue two-color palette</string>
+    <string name="fruit5_color_name">Pink and indigo two-color palette</string>
+    <string name="indigo_color_name">Indigo</string>
+    <string name="iris_color_name">Iris</string>
+    <string name="jade_color_name">Jade</string>
+    <string name="lemongrass_color_name">Lemongrass</string>
+    <string name="moonstone_color_name">Moonstone</string>
+    <string name="obsidian_color_name">Obsidian</string>
+    <string name="peony_color_name">Peony</string>
+    <string name="porcelain_color_name">Porcelain</string>
+    <string name="rainbow1_color_name">Red</string>
+    <string name="rainbow2_color_name">Orange</string>
+    <string name="rainbow3_color_name">Yellow</string>
+    <string name="rainbow4_color_name">Green</string>
+    <string name="rainbow5_color_name">Blue</string>
+    <string name="rainbow6_color_name">Indigo</string>
+    <string name="rainbow7_color_name">Violet</string>
+
     <string name="bundle_name_bundle1">@string/bundle1_color_name</string>
     <string name="bundle_name_bundle2">@string/bundle2_color_name</string>
     <string name="bundle_name_bundle3">@string/bundle3_color_name</string>
@@ -14,7 +37,15 @@
     <string name="bundle_name_fruits3">@string/fruit3_color_name</string>
     <string name="bundle_name_fruits4">@string/fruit4_color_name</string>
     <string name="bundle_name_fruits5">@string/fruit5_color_name</string>
+    <string name="bundle_name_indigo">@string/indigo_color_name</string>
+    <string name="bundle_name_iris">@string/iris_color_name</string>
+    <string name="bundle_name_jade">@string/jade_color_name</string>
+    <string name="bundle_name_lemongrass">@string/lemongrass_color_name</string>
     <string name="bundle_name_monochromatic">@string/color_name_monochromatic</string>
+    <string name="bundle_name_moonstone">@string/moonstone_color_name</string>
+    <string name="bundle_name_obsidian">@string/obsidian_color_name</string>
+    <string name="bundle_name_peony">@string/peony_color_name</string>
+    <string name="bundle_name_porcelain">@string/porcelain_color_name</string>
     <string name="bundle_name_rainbow1">@string/rainbow1_color_name</string>
     <string name="bundle_name_rainbow2">@string/rainbow2_color_name</string>
     <string name="bundle_name_rainbow3">@string/rainbow3_color_name</string>
@@ -22,13 +53,21 @@
     <string name="bundle_name_rainbow5">@string/rainbow5_color_name</string>
     <string name="bundle_name_rainbow6">@string/rainbow6_color_name</string>
     <string name="bundle_name_rainbow7">@string/rainbow7_color_name</string>
-    <string name="color_name_monochromatic">Monochromatic</string>
+
     <string name="color_style_fruits1">FRUIT_SALAD</string>
     <string name="color_style_fruits2">FRUIT_SALAD</string>
     <string name="color_style_fruits3">FRUIT_SALAD</string>
     <string name="color_style_fruits4">FRUIT_SALAD</string>
     <string name="color_style_fruits5">FRUIT_SALAD</string>
+    <string name="color_style_indigo">VIBRANT</string>
+    <string name="color_style_iris">EXPRESSIVE</string>
+    <string name="color_style_jade">TONAL_SPOT</string>
+    <string name="color_style_lemongrass">EXPRESSIVE</string>
     <string name="color_style_monochromatic">MONOCHROMATIC</string>
+    <string name="color_style_moonstone">SPRITZ</string>
+    <string name="color_style_obsidian">SPRITZ</string>
+    <string name="color_style_peony">VIBRANT</string>
+    <string name="color_style_porcelain">SPRITZ</string>
     <string name="color_style_rainbow1">RAINBOW</string>
     <string name="color_style_rainbow2">RAINBOW</string>
     <string name="color_style_rainbow3">RAINBOW</string>
@@ -36,18 +75,5 @@
     <string name="color_style_rainbow5">RAINBOW</string>
     <string name="color_style_rainbow6">RAINBOW</string>
     <string name="color_style_rainbow7">RAINBOW</string>
-    <string name="default_color_name">Classic</string>
-    <string name="fruit1_color_name">Yellow and red two-color palette</string>
-    <string name="fruit2_color_name">Green and orange two-color palette</string>
-    <string name="fruit3_color_name">Blue and green two-color palette</string>
-    <string name="fruit4_color_name">Light purple and blue two-color palette</string>
-    <string name="fruit5_color_name">Pink and indigo two-color palette</string>
-    <string name="rainbow1_color_name">Red</string>
-    <string name="rainbow2_color_name">Orange</string>
-    <string name="rainbow3_color_name">Yellow</string>
-    <string name="rainbow4_color_name">Green</string>
-    <string name="rainbow5_color_name">Blue</string>
-    <string name="rainbow6_color_name">Indigo</string>
-    <string name="rainbow7_color_name">Violet</string>
 
 </resources>
