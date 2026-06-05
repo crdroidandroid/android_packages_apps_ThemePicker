@@ -19,4 +19,12 @@
     <string name="bundle1_color_name">Άνθρακας</string>
     <string name="bundle2_color_name">Χαρτί</string>
     <string name="bundle3_color_name">Ήλιος</string>
+    <string name="indigo_color_name">Indigo</string>
+    <string name="iris_color_name">Ίριδα</string>
+    <string name="jade_color_name">Νεφρίτης</string>
+    <string name="lemongrass_color_name">Λεμονόχορτο</string>
+    <string name="moonstone_color_name">Σεληνόλιθος</string>
+    <string name="obsidian_color_name">Οψιδιανός</string>
+    <string name="peony_color_name">Παιώνια</string>
+    <string name="porcelain_color_name">Πορσελάνη</string>
 </resources>

@@ -19,4 +19,12 @@
     <string name="bundle1_color_name">Karbon</string>
     <string name="bundle2_color_name">Papir</string>
     <string name="bundle3_color_name">Sonce</string>
+    <string name="indigo_color_name">Indigo</string>
+    <string name="iris_color_name">Iris</string>
+    <string name="jade_color_name">Žad</string>
+    <string name="lemongrass_color_name">Limonska trava</string>
+    <string name="moonstone_color_name">Mesečev kamen</string>
+    <string name="obsidian_color_name">Obsidian</string>
+    <string name="peony_color_name">Potonika</string>
+    <string name="porcelain_color_name">Porcelan</string>
 </resources>

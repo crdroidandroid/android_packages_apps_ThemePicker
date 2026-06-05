@@ -15,16 +15,7 @@
   ~ limitations under the License.
   -->
 <resources>
-    <string name="default_color_name">Klasik</string>
-    <string name="bundle1_color_name">Karbon</string>
-    <string name="bundle2_color_name">Letër</string>
-    <string name="bundle3_color_name">Diell</string>
-    <string name="indigo_color_name">Indigo</string>
-    <string name="iris_color_name">Iris</string>
-    <string name="jade_color_name">Jade</string>
-    <string name="lemongrass_color_name">Limoni</string>
-    <string name="moonstone_color_name">Gur hëne</string>
-    <string name="obsidian_color_name">Obsidian</string>
-    <string name="peony_color_name">Bozhure</string>
-    <string name="porcelain_color_name">Porcelan</string>
+    <string name="default_color_name">Clàssicu</string>
+    <string name="bundle2_color_name">Pabiru</string>
+    <string name="bundle3_color_name">Sole</string>
 </resources>

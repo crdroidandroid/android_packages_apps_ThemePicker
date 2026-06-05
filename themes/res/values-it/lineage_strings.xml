@@ -19,4 +19,12 @@
     <string name="bundle1_color_name">Carbonio</string>
     <string name="bundle2_color_name">Carta</string>
     <string name="bundle3_color_name">Sole</string>
+    <string name="indigo_color_name">Indaco</string>
+    <string name="iris_color_name">Iris</string>
+    <string name="jade_color_name">Giada</string>
+    <string name="lemongrass_color_name">Citronella</string>
+    <string name="moonstone_color_name">Pietra di Luna</string>
+    <string name="obsidian_color_name">Ossidiana</string>
+    <string name="peony_color_name">Peonia</string>
+    <string name="porcelain_color_name">Porcellana</string>
 </resources>

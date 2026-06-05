@@ -19,4 +19,12 @@
     <string name="bundle1_color_name">கரிமம்</string>
     <string name="bundle2_color_name">தாள்</string>
     <string name="bundle3_color_name">ஞாயிறு</string>
+    <string name="indigo_color_name">கருநீலம்</string>
+    <string name="iris_color_name">கருவிழி</string>
+    <string name="jade_color_name">மரகதம்</string>
+    <string name="lemongrass_color_name">எலுமிச்சைப்புல்</string>
+    <string name="moonstone_color_name">சந்திரகாந்தம்</string>
+    <string name="obsidian_color_name">கருங்கல்</string>
+    <string name="peony_color_name">செவ்வரளி</string>
+    <string name="porcelain_color_name">பீங்கான்</string>
 </resources>

@@ -19,4 +19,5 @@
     <string name="bundle1_color_name">카본</string>
     <string name="bundle2_color_name">종이</string>
     <string name="bundle3_color_name">태양</string>
+    <string name="obsidian_color_name">흑요석</string>
 </resources>

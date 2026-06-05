@@ -19,4 +19,12 @@
     <string name="bundle1_color_name">Karbon</string>
     <string name="bundle2_color_name">Papír</string>
     <string name="bundle3_color_name">Napos</string>
+    <string name="indigo_color_name">Indigókék</string>
+    <string name="iris_color_name">Írisz</string>
+    <string name="jade_color_name">Jádezöld</string>
+    <string name="lemongrass_color_name">Citromfű</string>
+    <string name="moonstone_color_name">Holdkő</string>
+    <string name="obsidian_color_name">Obszidián</string>
+    <string name="peony_color_name">Babarózsa</string>
+    <string name="porcelain_color_name">Porcelán</string>
 </resources>

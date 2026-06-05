@@ -19,4 +19,12 @@
     <string name="bundle1_color_name">Carbon</string>
     <string name="bundle2_color_name">Paper</string>
     <string name="bundle3_color_name">Sun</string>
+    <string name="indigo_color_name">Indigo</string>
+    <string name="iris_color_name">Iris</string>
+    <string name="jade_color_name">Jade</string>
+    <string name="lemongrass_color_name">Lemongrass</string>
+    <string name="moonstone_color_name">Moonstone</string>
+    <string name="obsidian_color_name">Obsidian</string>
+    <string name="peony_color_name">Peony</string>
+    <string name="porcelain_color_name">Porcelain</string>
 </resources>

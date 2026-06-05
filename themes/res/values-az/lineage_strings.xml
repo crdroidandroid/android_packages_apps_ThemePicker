@@ -19,4 +19,12 @@
     <string name="bundle1_color_name">Karbon</string>
     <string name="bundle2_color_name">Kağız</string>
     <string name="bundle3_color_name">Günəş</string>
+    <string name="indigo_color_name">Tünd mavi</string>
+    <string name="iris_color_name">Açıq bənövşəyi</string>
+    <string name="jade_color_name">Yaşılımtıl</string>
+    <string name="lemongrass_color_name">Limon otu</string>
+    <string name="moonstone_color_name">Ay daşı</string>
+    <string name="obsidian_color_name">Obsidian</string>
+    <string name="peony_color_name">Tünd çəhrəyı</string>
+    <string name="porcelain_color_name">Porselen</string>
 </resources>

@@ -19,4 +19,12 @@
     <string name="bundle1_color_name">Carbón</string>
     <string name="bundle2_color_name">Páipéar</string>
     <string name="bundle3_color_name">Ghrian</string>
+    <string name="indigo_color_name">Indeagó</string>
+    <string name="iris_color_name">Iris</string>
+    <string name="jade_color_name">Séadghlas</string>
+    <string name="lemongrass_color_name">Féar líomóide</string>
+    <string name="moonstone_color_name">Cloch na Gealaí</string>
+    <string name="obsidian_color_name">Obsaidian</string>
+    <string name="peony_color_name">Piaine</string>
+    <string name="porcelain_color_name">Poirceallán</string>
 </resources>

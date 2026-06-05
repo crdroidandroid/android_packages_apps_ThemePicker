@@ -19,4 +19,12 @@
     <string name="bundle1_color_name">カーボン</string>
     <string name="bundle2_color_name">紙</string>
     <string name="bundle3_color_name">太陽</string>
+    <string name="indigo_color_name">インディゴ</string>
+    <string name="iris_color_name">虹彩</string>
+    <string name="jade_color_name">ヒスイ</string>
+    <string name="lemongrass_color_name">レモングラス</string>
+    <string name="moonstone_color_name">月光石</string>
+    <string name="obsidian_color_name">黒曜石</string>
+    <string name="peony_color_name">牡丹</string>
+    <string name="porcelain_color_name">磁器</string>
 </resources>
