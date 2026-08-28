@@ -66,8 +66,9 @@ constructor(
                 client.addOnColorsChangedListener(listener, Handler(Looper.getMainLooper()))
                 awaitClose { client.removeOnColorsChangedListener(listener) }
             }
-            // Make this a shared flow to make sure only one listener is added.
-            .shareIn(scope = scope, started = SharingStarted.WhileSubscribed(), replay = 1)
+            // HOME and LOCK are emitted back-to-back when collection starts. Keep both initial
+            // values so neither of the two filtered downstream collectors can miss its screen.
+            .shareIn(scope = scope, started = SharingStarted.WhileSubscribed(), replay = 2)
     private val homeWallpaperColors: Flow<WallpaperColors?> =
         wallpaperColorsCallback
             .filter { (screen, _) -> screen == Screen.HOME_SCREEN }
