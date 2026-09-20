@@ -381,7 +381,13 @@ constructor(private val defaultCustomizationOptionsBinder: DefaultCustomizationO
                     launch {
                         var disposableHandle: DisposableHandle? = null
                         if (BaseFlags.get(view.context).isExtendibleThemeManager()) {
-                            optionsViewModel.appIconPickerViewModel.iconStyleAndShapeSummary
+                            combine(
+                                    optionsViewModel.appIconPickerViewModel
+                                        .iconStyleAndShapeSummary,
+                                    colorUpdateViewModel.systemColorsUpdated,
+                                ) { summary, _ ->
+                                    summary
+                                }
                                 .collect { summary ->
                                     disposableHandle?.dispose()
                                     optionAppIcons?.let { view ->
@@ -405,15 +411,21 @@ constructor(private val defaultCustomizationOptionsBinder: DefaultCustomizationO
                         } else {
                             val previewIconPackageName =
                                 view.context.resources.getString(R.string.camera_package)
-                            val appIconDrawable =
-                                ShapeIconViewBinder.loadAppIcon(
-                                    view.context,
-                                    previewIconPackageName,
-                                )
-                            optionsViewModel.appIconPickerViewModel.shapeAndThemedIconSummary
+                            combine(
+                                    optionsViewModel.appIconPickerViewModel
+                                        .shapeAndThemedIconSummary,
+                                    colorUpdateViewModel.systemColorsUpdated,
+                                ) { summary, _ ->
+                                    summary
+                                }
                                 .collect { summary ->
                                     disposableHandle?.dispose()
                                     summary.iconShape?.let {
+                                        val appIconDrawable =
+                                            ShapeIconViewBinder.loadAppIcon(
+                                                view.context,
+                                                previewIconPackageName,
+                                            )
                                         disposableHandle =
                                             optionAppIconsIcon?.let { it1 ->
                                                 ShapeIconViewBinder
