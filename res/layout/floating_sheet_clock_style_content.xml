@@ -121,6 +121,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:includeFontPadding="false"
                     android:text="@string/clock_style_round" />
 
                 <com.google.android.material.button.MaterialButton
@@ -129,6 +130,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:includeFontPadding="false"
                     android:text="@string/clock_style_sharp" />
             </com.google.android.material.button.MaterialButtonToggleGroup>
         </LinearLayout>
