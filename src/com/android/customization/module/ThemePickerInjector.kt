@@ -30,7 +30,6 @@ import com.android.customization.model.color.ColorCustomizationManager
 import com.android.customization.model.color.ColorOptionsProvider.COLOR_SOURCE_PRESET
 import com.android.customization.model.color.ThemedWallpaperColorResources
 import com.android.customization.model.color.WallpaperColorResources
-import com.android.customization.model.font.FontManager
 import com.android.customization.model.grid.GridOptionsManager
 import com.android.customization.model.mode.DarkModeSnapshotRestorer
 import com.android.customization.model.theme.OverlayManagerCompat
@@ -48,7 +47,6 @@ import com.android.customization.picker.clock.ui.viewmodel.ClockSettingsViewMode
 import com.android.customization.picker.color.domain.interactor.ColorPickerInteractor
 import com.android.customization.picker.color.domain.interactor.ColorPickerSnapshotRestorer
 import com.android.customization.picker.color.ui.viewmodel.ColorPickerViewModel
-import com.android.customization.picker.font.ui.viewmodel.FontPickerViewModel
 import com.android.customization.picker.grid.data.repository.GridRepositoryImpl
 import com.android.customization.picker.grid.domain.interactor.GridInteractor
 import com.android.customization.picker.grid.domain.interactor.GridSnapshotRestorer
@@ -162,9 +160,6 @@ constructor(
     private var gridSnapshotRestorer: GridSnapshotRestorer? = null
     private var gridScreenViewModelFactory: GridScreenViewModel.Factory? = null
 
-    private var fontManager: FontManager? = null
-    private var fontPickerViewModelFactory: FontPickerViewModel.Factory? = null
-
     override fun getCustomizationSections(activity: ComponentActivity): CustomizationSections {
         val appContext = activity.applicationContext
         val clockViewFactory = getClockViewFactory(activity)
@@ -187,7 +182,6 @@ constructor(
                     getGridInteractor(appContext),
                     colorPickerInteractor.get(),
                     getUserEventLogger(),
-                    getFontPickerViewModelFactory(appContext),
                 )
                 .also { customizationSections = it }
     }
@@ -432,20 +426,6 @@ constructor(
         return gridSnapshotRestorer
             ?: GridSnapshotRestorer(interactor = getGridInteractor(context)).also {
                 gridSnapshotRestorer = it
-            }
-    }
-
-    private fun getFontManager(context: Context): FontManager {
-        return fontManager
-            ?: FontManager.getInstance(context, OverlayManagerCompat(context)).also {
-                fontManager = it
-            }
-    }
-
-    private fun getFontPickerViewModelFactory(context: Context): FontPickerViewModel.Factory {
-        return fontPickerViewModelFactory
-            ?: FontPickerViewModel.Factory(getFontManager(context)).also {
-                fontPickerViewModelFactory = it
             }
     }
 
